@@ -12,7 +12,9 @@
 
 {% for task in tasks %}
 
-  <p> {{task}} </p>
+  <p> {{task}} </p>x
+  
+  <a href="{% url 'update-task' task.id %}"> edit </a>
 
   {% comment %} <p> {{task.completed}} </p>
 

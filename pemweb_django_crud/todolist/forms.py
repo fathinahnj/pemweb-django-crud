@@ -3,8 +3,6 @@ from django.forms import ModelForm
 from . import models
 from .models import Task
 
-class TaskForm(forms.ModelForm):
-  model = models.Task
   # fields = ['title', 'completed', 'due_date']
   # widgets = {
   #           'title': forms.TextInput(attrs={
@@ -20,8 +18,10 @@ class TaskForm(forms.ModelForm):
   #               'type': 'datetime-local'
   #           }),
   #       }
-  
-  title = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Add in a new task'}))
-  class Meta:
-    model = Task
-    fields = "__all__"
+class TaskForm(forms.ModelForm):
+
+    title = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Add in a new task'}))
+
+    class Meta:
+        model = Task
+        fields = "__all__"

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Task
-from .forms import TaskForm
+from . models import Task
+from . forms import TaskForm
 
 def index(request):
   form = TaskForm()
@@ -14,3 +14,14 @@ def index(request):
   
   context = {'tasks': tasks, 'TaskForm':form}
   return render(request, 'todo.html', context)
+
+def updateTask(request, pk):
+  task = Task.objects.get(id=pk)
+  form = TaskForm(instance=task)
+  if request.method == 'POST':
+    form = TaskForm(request.POST, instance=task)
+    if form.is_valid:
+      form.save()
+    return redirect('/')
+  context = {'TaskForm':form}
+  return render(request, 'update-task.html', context)
