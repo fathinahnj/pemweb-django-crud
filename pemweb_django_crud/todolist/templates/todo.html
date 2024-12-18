@@ -3,8 +3,10 @@
 <form method="POST" action="/">
   
   {% csrf_token %}
-
-  {{TaskForm.title}}
+  {{ TaskForm.as_p }} 
+  {% comment %} {{ TaskForm.title.label_tag }} {{ TaskForm.title }}
+  {{ TaskForm.category.label_tag }} {{ TaskForm.category }}
+  {{ TaskForm.completed.label_tag }} {{ TaskForm.completed }} {% endcomment %}
 
   <input class="btn" type="submit" name="Create Task">
   
@@ -23,3 +25,12 @@
   <p> {{task.due_date}} </p> {% endcomment %}
 
 {% endfor %}
+
+{% comment %} <h2>Categories:</h2>
+<ul>
+  {% for category in categories %}
+    <li>{{ category.name }}</li>
+  {% empty %}
+    <li>No categories available.</li>
+  {% endfor %}
+</ul> {% endcomment %}

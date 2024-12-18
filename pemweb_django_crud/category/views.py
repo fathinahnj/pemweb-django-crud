@@ -23,7 +23,9 @@ def updateCategory(request, pk):
     form = CategoryForm(request.POST, instance=category)
     if form.is_valid:
       form.save()
-    return redirect('/category')
+      return redirect('')
+    else:
+      form = CategoryForm(instance=category)
   context = {'form':form}
   return render(request, 'update-category.html', context)
 
@@ -31,6 +33,10 @@ def deleteCategory(request, pk):
   category = Category.objects.get(id=pk)
   if request.method == 'POST':
     category.delete()
-    return redirect('/category')
+    return redirect('')
   context = {'category': category}
   return render(request, 'delete-task.html', context)
+
+def category_dropdown(request):
+    categories = Category.objects.all()
+    return render(request, 'category_dropdown.html', {'categories': categories})

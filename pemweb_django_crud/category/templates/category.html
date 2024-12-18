@@ -3,6 +3,16 @@
 <form method="POST" action="">
   {% csrf_token %}
   {{ form.as_p }}
+
+  <label for="category-select">Category:</label>
+  <select id="category-select" name="category">
+    {% for category in categories %}
+      <option value="{{ category.id }}">{{ category.title }}</option>
+    {% empty %}
+      <option value="">No categories available</option>
+    {% endfor %}
+  </select>
+
   <input class="btn" type="submit" value="Create Category">
 </form>
 

@@ -1,18 +1,22 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from . models import Task
+from . models import Task, Category
 from . forms import TaskForm
 
 def index(request):
   form = TaskForm()
   tasks = Task.objects.all()
+  categories = Category.objects.all()  # Fetch all categories
+  
   if request.method == 'POST':
     form = TaskForm(request.POST)
     if form.is_valid:
       form.save()
-    return redirect('/')
+      return redirect('/')
+    else:
+      print(form.errors) 
   
-  context = {'tasks': tasks, 'TaskForm':form}
+  context = {'tasks': tasks, 'TaskForm':form, 'categories': categories}
   return render(request, 'todo.html', context)
 
 def updateTask(request, pk):
