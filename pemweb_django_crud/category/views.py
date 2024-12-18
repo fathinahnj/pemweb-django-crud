@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect # type: ignore # type: ignore
+from django.http import HttpResponse # type: ignore
 from . models import Category
 from . forms import CategoryForm
 

@@ -1,5 +1,5 @@
-from django import forms 
-from django.forms import ModelForm
+from django import forms  # type: ignore
+from django.forms import ModelForm # type: ignore
 from . import models
 from .models import Task
 

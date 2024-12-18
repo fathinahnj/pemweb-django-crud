@@ -1,28 +1,47 @@
-<h1>new category: </h1>
-
-<form method="POST" action="">
-  {% csrf_token %}
-  {{ form.as_p }}
-
-  <label for="category-select">Category:</label>
-  <select id="category-select" name="category">
-    {% for category in categories %}
-      <option value="{{ category.id }}">{{ category.title }}</option>
-    {% empty %}
-      <option value="">No categories available</option>
-    {% endfor %}
-  </select>
-
-  <input class="btn" type="submit" value="Create Category">
-</form>
-
-<h2>Category List:</h2>
-{% for category in categories %}
-
-  <p> {{category}} </p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <a href="{% url 'update-category' category.id %}"> edit </a>
+  <title>Get 'em Done!</title>
+  
+  <meta name="description" content="A simple to-do list.">
+  
+  <link rel="stylesheet" href="./css/style.css">  
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <a href="{% url 'delete-category' category.id %}"> delete </a>
+  <script src="scripts.js" defer></script>
+</head>
 
-{% endfor %}
+<body>
+
+  <h1>New Category:</h1>
+
+  <form method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <label for="category-select">Category:</label>
+    <select id="category-select" name="category">
+      {% for category in categories %}
+        <option value="{{ category.id }}">{{ category.title }}</option>
+      {% empty %}
+        <option value="">No categories available</option>
+      {% endfor %}
+    </select>
+
+    <input class="btn" type="submit" value="Create Category">
+  </form>
+
+  <h2>Category List:</h2>
+    {% for category in categories %}
+      <div class="category-item">
+        <p>{{ category }}</p>
+        <a href="{% url 'update-category' category.id %}">Edit</a>
+        <a href="{% url 'delete-category' category.id %}">Delete</a>
+      </div>
+    {% endfor %}
+
+
+</body>
