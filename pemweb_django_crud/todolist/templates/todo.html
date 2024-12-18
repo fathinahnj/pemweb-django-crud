@@ -20,17 +20,18 @@
 
   <a href="{% url 'delete-task' task.id %}"> delete </a>
 
-  {% comment %} <p> {{task.completed}} </p>
+  <label for="category-select">Category:</label>
+  <select id="category-select" name="category">
+    {% for category in categories %}
+      <option value="{{ category.id }}">{{ category.title }}</option>
+    {% empty %}
+      <option value="">No categories available</option>
+    {% endfor %}
+  </select>
 
-  <p> {{task.due_date}} </p> {% endcomment %}
+  {% comment %} <p> {{task.completed}} </p> {% endcomment %}
+
+  {% comment %} <p> {{task.due_date}} </p>  {% endcomment %}
 
 {% endfor %}
 
-{% comment %} <h2>Categories:</h2>
-<ul>
-  {% for category in categories %}
-    <li>{{ category.name }}</li>
-  {% empty %}
-    <li>No categories available.</li>
-  {% endfor %}
-</ul> {% endcomment %}
