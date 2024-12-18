@@ -1,0 +1,25 @@
+<h1>new category: </h1>
+
+<form method="POST" action="/">
+  
+  {% csrf_token %}
+
+  {{CategoryForm.title}}
+
+  <input class="btn" type="submit" name="Create Category">
+  
+</form>
+
+{% comment %} {% for category in categories %}
+
+  <p> {{category}} </p> {% endcomment %}
+  
+  {% comment %} <a href="{% url 'update-task' task.id %}"> edit </a> {% endcomment %}
+
+  {% comment %} <a href="{% url 'delete-task' task.id %}"> delete </a> {% endcomment %}
+
+  {% comment %} <p> {{task.completed}} </p>
+
+  <p> {{task.due_date}} </p> {% endcomment %}
+
+{% comment %} {% endfor %} {% endcomment %}
