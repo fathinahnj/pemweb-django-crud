@@ -1,0 +1,10 @@
+<h1>delete task: </h1>
+
+<p>Apakah Anda yakin ingin menghapus "{{task}}"?</p>
+
+<form>
+  {% csrf_token %}
+  <input type="submit" name="confirm delete">
+</form>
+
+<a href="{% url '' %}">Cancel</a>
