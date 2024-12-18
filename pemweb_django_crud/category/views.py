@@ -15,3 +15,14 @@ def create_category(request):
   categories = Category.objects.all()
   context = {'categories': categories, 'form':form}
   return render(request, 'category.html', context)
+
+def updateCategory(request, pk):
+  category = Category.objects.get(id=pk)
+  form = CategoryForm(instance=category)
+  if request.method == 'POST':
+    form = CategoryForm(request.POST, instance=category)
+    if form.is_valid:
+      form.save()
+    return redirect('/category')
+  context = {'form':form}
+  return render(request, 'update-category.html', context)

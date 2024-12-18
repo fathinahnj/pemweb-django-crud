@@ -1,0 +1,16 @@
+<h1>edit task: </h1>
+
+{% comment %} <form method="POST" action="">
+  
+  {% csrf_token %}
+
+  {{CategoryForm}}
+
+  <input class="btn" type="submit" name="Edit Category">
+  
+</form> {% endcomment %}
+<form method="POST" action="">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input class="btn" type="submit" value="Edit Category">
+</form>

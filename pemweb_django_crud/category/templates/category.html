@@ -7,11 +7,24 @@
 </form>
 
 <h2>Category List:</h2>
-<ul>
+{% comment %} <ul>
   {% for category in categories %}
     <li>{{ category.title }}</li>
   {% endfor %}
-</ul>
+</ul> {% endcomment %}
+{% for category in categories %}
+
+  <p> {{category.title}} </p>
+  
+  <a href="{% url 'update-category' category.id %}"> edit </a>
+
+  {% comment %} <a href="{% url 'delete-category' category.id %}"> delete </a> {% endcomment %}
+
+  {% comment %} <p> {{task.completed}} </p>
+
+  <p> {{task.due_date}} </p> {% endcomment %}
+
+{% endfor %}
 
 {% comment %} {% for category in categories %}
 
