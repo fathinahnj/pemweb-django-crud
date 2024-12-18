@@ -26,3 +26,11 @@ def updateCategory(request, pk):
     return redirect('/category')
   context = {'form':form}
   return render(request, 'update-category.html', context)
+
+def deleteCategory(request, pk):
+  category = Category.objects.get(id=pk)
+  if request.method == 'POST':
+    category.delete()
+    return redirect('/category')
+  context = {'category': category}
+  return render(request, 'delete-task.html', context)
