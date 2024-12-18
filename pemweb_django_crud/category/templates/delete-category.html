@@ -1,11 +1,24 @@
-<h1>delete task: </h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Category</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Delete Category</h1>
+      <p>Apakah Anda yakin ingin menghapus kategori "{{ category.title }}"?</p>
 
-<p>Apakah Anda yakin ingin menghapus kategori "{{form}}"?</p>
+      <form method="POST" action="">
+        {% csrf_token %}
+        <input type="submit" class="btn delete-btn" value="Delete Category" />
+      </form>
 
-<form method="POST" action="">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input class="btn" type="submit" value="Delete Category">
-</form>
-
-<a href="{% url '' %}">Cancel</a>
+      <!-- Fix: Add the correct URL for the Cancel link -->
+      <a href="{% url 'task-category' %}">Cancel</a>
+    </div>
+  </body>
+</html>
