@@ -2,7 +2,7 @@
 
 <p>Apakah Anda yakin ingin menghapus "{{task}}"?</p>
 
-<form>
+<form method="POST" action="">
   {% csrf_token %}
   <input type="submit" name="confirm delete">
 </form>
