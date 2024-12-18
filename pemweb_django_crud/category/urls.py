@@ -2,5 +2,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.category, name="task-category"),
+    path('', views.create_category, name="task-category"),
 ]

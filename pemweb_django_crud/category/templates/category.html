@@ -1,14 +1,17 @@
 <h1>new category: </h1>
 
-<form method="POST" action="/">
-  
+<form method="POST" action="">
   {% csrf_token %}
-
-  {{CategoryForm.title}}
-
-  <input class="btn" type="submit" name="Create Category">
-  
+  {{ form.as_p }}
+  <input class="btn" type="submit" value="Create Category">
 </form>
+
+<h2>Category List:</h2>
+<ul>
+  {% for category in categories %}
+    <li>{{ category.title }}</li>
+  {% endfor %}
+</ul>
 
 {% comment %} {% for category in categories %}
 
