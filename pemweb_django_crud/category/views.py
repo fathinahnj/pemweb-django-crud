@@ -8,7 +8,7 @@ def create_category(request):
     form = CategoryForm(request.POST)
     if form.is_valid:
       form.save()
-    return redirect('/')
+    return redirect('/category')
   else:
     form = CategoryForm()
     
