@@ -1,11 +1,26 @@
-<h1>edit task: </h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Task</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Heading -->
+      <h1>Edit Task</h1>
 
-<form method="POST" action="">
-  
-  {% csrf_token %}
+      <!-- Edit Task Form -->
+      <form method="POST" action="">
+        {% csrf_token %} {{ form.as_p }}
+        <!-- Renders the form fields properly styled -->
+        <input class="btn" type="submit" value="Save Changes" />
+      </form>
 
-  {{TaskForm}}
-
-  <input class="btn" type="submit" name="Edit Task">
-  
-</form>
+      <!-- Cancel Link -->
+      <a href="{% url 'todo-list' %}" class="cancel-link">Cancel</a>
+    </div>
+  </body>
+</html>

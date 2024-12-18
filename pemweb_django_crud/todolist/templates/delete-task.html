@@ -1,10 +1,26 @@
-<h1>delete task: </h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Task</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Delete Task Confirmation -->
+      <h1>Delete Task</h1>
+      <p>Apakah Anda yakin ingin menghapus "{{ task.title }}"?</p>
 
-<p>Apakah Anda yakin ingin menghapus "{{task}}"?</p>
+      <!-- Delete Form -->
+      <form method="POST" action="">
+        {% csrf_token %}
+        <input class="btn" type="submit" value="Confirm Delete" />
+      </form>
 
-<form method="POST" action="">
-  {% csrf_token %}
-  <input type="submit" name="confirm delete">
-</form>
-
-<a href="{% url '' %}">Cancel</a>
+      <!-- Cancel Link -->
+      <a href="{% url 'todo-list' %}" class="cancel-link">Cancel</a>
+    </div>
+  </body>
+</html>
