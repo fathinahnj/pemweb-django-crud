@@ -1,37 +1,73 @@
-<h1>new task: </h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-do List</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Heading -->
+      <h1>To-do List.</h1>
 
-<form method="POST" action="/">
-  
-  {% csrf_token %}
-  {{ TaskForm.as_p }} 
-  {% comment %} {{ TaskForm.title.label_tag }} {{ TaskForm.title }}
-  {{ TaskForm.category.label_tag }} {{ TaskForm.category }}
-  {{ TaskForm.completed.label_tag }} {{ TaskForm.completed }} {% endcomment %}
+      <!-- Form Section -->
+      <form method="POST" action="/">
+        {% csrf_token %}
+        <label for="title">Title:</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="Add in a new task"
+        />
 
-  <input class="btn" type="submit" name="Create Task">
-  
-</form>
+        <label for="category">Category:</label>
+        <select name="category" id="category">
+          <option value="">-</option>
+          {% for category in categories %}
+          <option value="{{ category.id }}">{{ category.title }}</option>
+          {% endfor %}
+        </select>
 
-{% for task in tasks %}
+        <div class="completed">
+          <input type="checkbox" id="completed" name="completed" />
+          <label for="completed">Completed</label>
+        </div>
 
-  <p> {{task.title}} </p>
-  
-  <a href="{% url 'update-task' task.id %}"> edit </a>
+        <input type="submit" value="Submit" />
+      </form>
 
-  <a href="{% url 'delete-task' task.id %}"> delete </a>
-
-  <label for="category-select">Category:</label>
-  <select id="category-select" name="category">
-    {% for category in categories %}
-      <option value="{{ category.id }}">{{ category.title }}</option>
-    {% empty %}
-      <option value="">No categories available</option>
-    {% endfor %}
-  </select>
-
-  {% comment %} <p> {{task.completed}} </p> {% endcomment %}
-
-  {% comment %} <p> {{task.due_date}} </p>  {% endcomment %}
-
-{% endfor %}
-
+      <!-- Task List -->
+      <div class="task-container">
+        {% for task in tasks %}
+        <div class="task-card">
+          <!-- Left Section: Task Title and Category -->
+          <div class="task-details">
+            <h3 class="{% if task.completed %}completed-task{% endif %}">
+              {{ task.title }}
+            </h3>
+            <div class="category-row">
+              <label>Category:</label>
+              <select>
+                {% for category in categories %}
+                  <option value="{{ category.id }}" {% if task.category.id == category.id %}selected{% endif %}>
+                    {{ category.title }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>          
+      
+          <!-- Right Section: Edit and Delete Buttons -->
+          <div class="task-actions">
+            <a href="{% url 'update-task' task.id %}" class="edit">Edit</a>
+            <a href="{% url 'delete-task' task.id %}" class="delete">Delete</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>      
+    </div>
+  </body>
+</html>
