@@ -1,47 +1,56 @@
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
-  <title>Get 'em Done!</title>
-  
-  <meta name="description" content="A simple to-do list.">
-  
-  <link rel="stylesheet" href="../static/">  
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Category</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Heading -->
+      <h1>New Category:</h1>
 
-  <script src="scripts.js" defer></script>
-</head>
-
-<body>
-
-  <h1>New Category:</h1>
-
-  <form method="POST" action="">
-    {% csrf_token %}
-    {{ form.as_p }}
-
-    <label for="category-select">Category:</label>
-    <select id="category-select" name="category">
-      {% for category in categories %}
-        <option value="{{ category.id }}">{{ category.title }}</option>
-      {% empty %}
-        <option value="">No categories available</option>
-      {% endfor %}
-    </select>
-
-    <input class="btn" type="submit" value="Create Category">
-  </form>
-
-  <h2>Category List:</h2>
-    {% for category in categories %}
-      <div class="category-item">
-        <p>{{ category }}</p>
-        <a href="{% url 'update-category' category.id %}">Edit</a>
-        <a href="{% url 'delete-category' category.id %}">Delete</a>
+      <!-- Form Section -->
+      <div class="task-form-container">
+        <form method="POST" action="">
+          {% csrf_token %}
+          <label for="title">Title:</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Add in a new category"
+          />
+          <input type="submit" class="btn" value="Create Category" />
+        </form>
       </div>
-    {% endfor %}
 
+      <!-- Category List -->
+      <h2 class="list-heading">Category List:</h2>
+      <div class="task-container">
+        {% for category in categories %}
+        <div class="task-card">
+          <!-- Left Section: Category Title -->
+          <div class="task-details">
+            <h3>{{ category.title }}</h3>
+          </div>
 
-</body>
+          <!-- Right Section: Edit and Delete Buttons -->
+          <div class="task-actions">
+            <a href="{% url 'update-category' pk=category.id %}" class="edit">
+              Edit
+            </a>
+            <a href="{% url 'delete-category' pk=category.id %}" class="delete">
+              Delete
+            </a>
+          </div>
+        </div>
+        {% empty %}
+        <p>No categories available yet. Add a new one above!</p>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
